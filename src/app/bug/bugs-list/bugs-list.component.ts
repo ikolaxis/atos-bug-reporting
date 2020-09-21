@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BugModel } from '../bug.model';
+import { BugsService } from '../bugs.service';
+import { SortingModel } from '../sorting/sorting.model';
 
 @Component({
   selector: 'atos-bugs-list',
@@ -11,10 +13,18 @@ export class BugsListComponent implements OnInit {
 
   bugs: BugModel[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private bugsService: BugsService) { }
 
   ngOnInit(): void {
-    this.bugs = this.route.snapshot.data.bugs;
+    this.bugsService.getBugs().subscribe(data => {
+      this.bugs = data;
+    });
+  }
+
+  clickedEvent(event: SortingModel) {
+    this.bugsService.getBugsSorted(event).subscribe(data => {
+      this.bugs = data;
+    });
   }
 
 }

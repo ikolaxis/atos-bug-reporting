@@ -1,12 +1,11 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Reporter</th>
-            <th scope="col">Date</th>
-            <th scope="col">Created</th>
-            <th scope="col">Status</th>
+            <th scope="col">Title <atos-sorting (clickedEvent)="clickedEvent($event)" [property]="'title'"></atos-sorting></th>
+            <th scope="col">Priority <atos-sorting (clickedEvent)="clickedEvent($event)" [property]="'priority'"></atos-sorting></th>
+            <th scope="col">Reporter <atos-sorting (clickedEvent)="clickedEvent($event)" [property]="'reporter'"></atos-sorting></th>
+            <th scope="col">Date Created <atos-sorting (clickedEvent)="clickedEvent($event)" [property]="'createdAt'"></atos-sorting></th>
+            <th scope="col">Status <atos-sorting (clickedEvent)="clickedEvent($event)" [property]="'status'"></atos-sorting></th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +13,6 @@
             <td>{{bug.title}}</td>
             <td>{{bug.priority}}</td>
             <td>{{bug.reporter}}</td>
-            <td>{{bug.updatedAt | date:"yyyy-mm-dd hh:mm"}}</td>
             <td>{{bug.createdAt | date:"yyyy-mm-dd hh:mm"}}</td>
             <td>{{bug.status}}</td>
         </tr>
