@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BugModel } from '../bug.model';
 
 @Component({
   selector: 'atos-bugs-list',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BugsListComponent implements OnInit {
 
-  constructor() { }
+  bugs: BugModel[];
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.bugs = this.route.snapshot.data.bugs;
   }
 
 }
