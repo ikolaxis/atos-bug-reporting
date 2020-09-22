@@ -17,4 +17,9 @@ export class BugsListComponent implements OnInit {
     this.bugs = this.route.snapshot.data.bugs;
   }
 
+  onClickSortByHeader(event?: MouseEvent): void {
+    const eventTarget = event ? (event.target as HTMLElement).textContent : '';
+    console.log("Clicked on " + eventTarget);
+  }
+
 }
