@@ -1,5 +1,5 @@
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-dark" [attr.data-sort-by]="sortByHeader" [attr.data-sort-order]="sortOrder">
     <tr>
       <th (click)="onClickSortByHeader($event)" scope="col">Title</th>
       <th (click)="onClickSortByHeader($event)" scope="col">Priority</th>
