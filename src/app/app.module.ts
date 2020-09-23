@@ -16,10 +16,10 @@ import { BugModule } from './bug/bug.module';
     BrowserModule, 
     BugRoutingModule,
     HttpClientModule,
-    BugModule
-/*     RouterModule.forRoot([{
+    BugModule,
+    RouterModule.forRoot([{
       path: '', redirectTo: 'bugs', pathMatch: 'full'
-    }]) */
+    }])
   ],
   providers: [],
   bootstrap: [AppComponent]

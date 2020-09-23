@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BugModel } from './bug.model';
 import { Observable } from 'rxjs';
-import { SortingModel } from './sorting/sorting.model';
+import { SortingModel } from '../shared/sorting/sorting.model';
 
 
 @Injectable({
@@ -19,9 +19,12 @@ export class BugsService {
   }
 
   getBugsSorted(data: SortingModel): Observable<BugModel[]> {
+    
     var ascendingStr = data.isAscending ? "asc" : "desc";
-    var paramStr = "?sort=" + data.property + "," + ascendingStr;
+    const params = new HttpParams().append('sort', data.property + ',' + ascendingStr);
+    console.log("with params: ");
+    console.log(params);
     // sort=createdAt,asc
-    return this.http.get<BugModel[]>(this.endpoint + paramStr);
+    return this.http.get<BugModel[]>(this.endpoint, {params});
   }
 }
