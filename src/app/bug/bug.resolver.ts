@@ -12,6 +12,6 @@ export class BugResolver implements Resolve<BugModel[]> {
   constructor(private bugService: BugsService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BugModel[]> {
-    return this.bugService.get();
+    return this.bugService.getBugs();
   }
 }

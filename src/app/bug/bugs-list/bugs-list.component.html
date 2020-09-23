@@ -1,11 +1,11 @@
 <table class="table">
   <thead class="thead-dark" [attr.data-sort-by]="sortByHeader" [attr.data-sort-order]="sortOrder">
     <tr>
-      <th (click)="onClickSortByHeader($event)" scope="col">Title</th>
-      <th (click)="onClickSortByHeader($event)" scope="col">Priority</th>
-      <th (click)="onClickSortByHeader($event)" scope="col">Reporter</th>
-      <th (click)="onClickSortByHeader($event)" scope="col">Created At</th>
-      <th (click)="onClickSortByHeader($event)" scope="col">Status</th>
+      <th (click)="onClickSortByHeader($event)" abbr="title" scope="col">Title</th>
+      <th (click)="onClickSortByHeader($event)" abbr="priority" scope="col">Priority</th>
+      <th (click)="onClickSortByHeader($event)" abbr="reporter" scope="col">Reporter</th>
+      <th (click)="onClickSortByHeader($event)" abbr="createdAt" scope="col">Created At</th>
+      <th (click)="onClickSortByHeader($event)" abbr="status" scope="col">Status</th>
     </tr>
   </thead>
   <tbody>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BugModel } from '../bug.model';
+import { BugsService } from '../bugs.service';
 
 @Component({
   selector: 'atos-bugs-list',
@@ -14,18 +15,15 @@ export class BugsListComponent implements OnInit {
 
   bugs: BugModel[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private bugService: BugsService) { }
 
   ngOnInit(): void {
-    this.sortByHeader = "title";
-    this.sortOrder = "desc";
-
     this.bugs = this.route.snapshot.data.bugs;
   }
 
   onClickSortByHeader(event?: MouseEvent): void {
     // Which table header did we click on?
-    const tableHeaderClicked = event ? (event.target as HTMLElement).textContent : '';
+    const tableHeaderClicked = event ? (event.target as HTMLTableCellElement).abbr : '';
 
     this.sortByHeader = tableHeaderClicked;
 
@@ -33,7 +31,12 @@ export class BugsListComponent implements OnInit {
     // then we need to toggle the order, e.g. from "desc" to "asc" and vice versa.
     this.sortOrder = (this.sortByHeader === tableHeaderClicked) ? this.toggleSortOrder(this.sortOrder) : 'desc';
 
-    console.log("Sort by: " + this.sortByHeader + ", Order: " + this.sortOrder);
+    console.log('Sort by: ' + this.sortByHeader + ', Order: ' + this.sortOrder);
+
+    // Perform new query to retrieve list of bugs
+    this.bugService.getBugsSorted(this.sortByHeader, this.sortOrder).subscribe(reply => {
+      this.bugs = reply;
+    });
   }
 
   toggleSortOrder(sortOrder: string): string {
@@ -47,7 +50,7 @@ export class BugsListComponent implements OnInit {
         inverseSortOrder = 'desc';
         break;
       default:
-        console.log("Sort order is undefined. Using a descending order as default.");
+        console.log('Sort order is undefined. Using a descending order as default.');
         break;
     }
 
