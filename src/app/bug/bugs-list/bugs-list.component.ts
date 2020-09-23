@@ -26,4 +26,8 @@ export class BugsListComponent implements OnInit {
       console.log("Received bugs from server");
     });
   }
+
+  createNewClicked() {
+    this.router.navigate(["/bugs/create"]);
+  }
 }
