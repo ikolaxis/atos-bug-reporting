@@ -10,7 +10,7 @@ import { SortingModel } from '../shared/sorting/sorting.model';
 })
 export class BugsService {
 
-  private endpoint = "https://bug-report-system-server.herokuapp.com/bugs";
+  private endpoint = 'https://bug-report-system-server.herokuapp.com/bugs';
 
   constructor(private http: HttpClient) { }
 
@@ -18,13 +18,17 @@ export class BugsService {
     return this.http.get<BugModel[]>(this.endpoint);
   }
 
-  getBugsSorted(data: SortingModel): Observable<BugModel[]> {
-    
-    var ascendingStr = data.isAscending ? "asc" : "desc";
-    const params = new HttpParams().append('sort', data.property + ',' + ascendingStr);
-    console.log("with params: ");
+  getBugsSorted(bugs: SortingModel): Observable<BugModel[]> {
+
+    const ascendingStr = bugs.isAscending ? 'asc' : 'desc';
+    const params = new HttpParams().append('sort', bugs.property + ',' + ascendingStr);
+    console.log('with params: ');
     console.log(params);
     // sort=createdAt,asc
     return this.http.get<BugModel[]>(this.endpoint, {params});
+  }
+
+  saveBug(bug: BugModel): Observable<BugModel> {
+    return this.http.post<BugModel>(this.endpoint, bug);
   }
 }

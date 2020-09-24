@@ -1,1 +1,24 @@
-<p>bugs-creation works!</p>
+<form [formGroup]="myForm">
+  <div>
+    <label>Title</label>
+    <input formControlName="title" type="text">
+  </div>
+  <div>
+    <label>Description</label>
+    <input formControlName="description" type="text">
+  </div>
+  <div>
+    <label>Priority</label>
+    <input formControlName="priority" type="text">
+  </div>
+  <div>
+    <label>Reporter</label>
+    <input formControlName="reporter" type="text">
+  </div>
+  <div>
+    <label>Status</label>
+    <input formControlName="status" type="text">
+  </div>
+
+  <button (click)="onClickSaveBug()">Save</button>
+</form>

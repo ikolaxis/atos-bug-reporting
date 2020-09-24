@@ -5,15 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared/shared.module';
 import { BugsCreationComponent } from './bugs-creation/bugs-creation.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [BugsListComponent, BugsCreationComponent],
   imports: [
-    CommonModule, 
+    CommonModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
     BugsListComponent
