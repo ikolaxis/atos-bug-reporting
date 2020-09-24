@@ -17,6 +17,7 @@
             <td>{{bug.reporter}}</td>
             <td>{{bug.createdAt | date:"yyyy-mm-dd hh:mm"}}</td>
             <td>{{bug.status}}</td>
+            <td><button (click) = "onClickEdit(bug.id)">Edit</button></td>
         </tr>
     </tbody>
 </table>

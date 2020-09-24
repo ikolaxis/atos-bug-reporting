@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BugsService } from '../bugs.service';
 
 @Component({
@@ -11,8 +11,11 @@ import { BugsService } from '../bugs.service';
 export class BugsCreationComponent implements OnInit {
 
   myForm: FormGroup;
+  bugId: string;
 
-  constructor(private bugsService: BugsService, private router: Router) { }
+  constructor(private bugsService: BugsService, private router: Router, private route: ActivatedRoute) { 
+    this.bugId = this.route.snapshot.queryParams.id;
+  }
 
   ngOnInit(): void {
     this.myForm = new FormGroup({
@@ -22,9 +25,21 @@ export class BugsCreationComponent implements OnInit {
       reporter: new FormControl(null, Validators.required),
       status: new FormControl(null, Validators.required)
     });
+
+    if(this.bugId){
+      this.bugsService.getBugByid(this.bugId).subscribe((bug) => 
+        this.myForm.patchValue(bug)
+      );
+    }
   }
 
   onClickSaveBug(): void {
-    this.bugsService.saveBug(this.myForm.value).subscribe(() => this.router.navigate(['/bugs']));
+    if (!this.bugId){
+      this.bugsService.saveBug(this.myForm.value).subscribe(() => this.router.navigate(['/bugs']));
+    }
+    else {
+      this.bugsService.editBug(this.bugId, this.myForm.value).subscribe(() => this.router.navigate(['/bugs']));
+    }
   }
+
 }

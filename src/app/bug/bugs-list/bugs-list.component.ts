@@ -30,4 +30,9 @@ export class BugsListComponent implements OnInit {
   createNewClicked() {
     this.router.navigate(["/bugs/create"]);
   }
+
+  onClickEdit(bugId: string){
+    this.router.navigate(["/bugs/create"], {queryParams:{id:bugId}});
+    console.log(bugId);
+  }
 }
