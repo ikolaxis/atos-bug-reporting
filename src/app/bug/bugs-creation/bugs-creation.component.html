@@ -9,7 +9,7 @@
   </div>
   <div class="formGroup col-md-6">
     <div class="form-row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label>Priority</label>
         <select class ="form-control" formControlName="priority" type="text" placeholder="Select">
           <!--<option selected>Choose...</option>-->
@@ -18,7 +18,7 @@
           <option [ngValue]="3">Critical</option>
         </select>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label>Reporter</label>
         <select class ="form-control" formControlName="reporter" type="text" placeholder="Select">
           <option [ngValue]="'QA'">QA</option>
@@ -26,7 +26,7 @@
           <option [ngValue]="'DEV'">DEV</option>
         </select>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label>Status</label>
         <select class ="form-control" formControlName="status" type="text" placeholder="Select">
           <option [ngValue]="'Ready for Test'">Ready for Test</option>
@@ -35,6 +35,23 @@
         </select>
       </div>
     </div>
+    <div class="container" *ngIf ="bugId">
+      <label>Comments</label>
+      <div *ngFor="let commentFormGroup of commentsFormArray.controls">
+        <div [formGroup]="commentFormGroup">
+          <div class="formGroup col-md-6">
+            <label>Reporter</label>
+            <input class ="form-control" formControlName="reporter" type="text" placeholder="Reporter">
+          </div>
+          <div class="formGroup col-md-6">
+            <label>Description</label>
+            <input class ="form-control" formControlName="description" type="text" placeholder="Description">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-outline-secondary btn-sm" (click)="createCommentFields('','')">Add Comments</button>
+    </div>
+    <br>
     <button type="submit" class="btn btn-primary" (click)="onClickSaveBug()">Save</button>
   </div>
 </form>

@@ -1,3 +1,5 @@
+import { BugCommentsModel } from './bug-comments.model';
+
 export interface BugModel {
   id: string;
   title: string;
@@ -6,4 +8,6 @@ export interface BugModel {
   status: string;
   updateAt: Date;
   createdAt: Date;
+  comments: BugCommentsModel[];
+
 }

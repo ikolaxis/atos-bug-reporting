@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BugsService } from '../bugs.service';
 
@@ -11,24 +11,33 @@ import { BugsService } from '../bugs.service';
 export class BugsCreationComponent implements OnInit {
 
   myForm: FormGroup;
+  commentsFormArray: FormArray;
   bugId: string;
 
-  constructor(private bugsService: BugsService, private router: Router, private route: ActivatedRoute) { 
+  constructor(private fb: FormBuilder, private bugsService: BugsService, private router: Router, private route: ActivatedRoute) { 
     this.bugId = this.route.snapshot.queryParams.id;
   }
 
   ngOnInit(): void {
-    this.myForm = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      description: new FormControl(null, Validators.required),
-      priority: new FormControl(null, Validators.required),
-      reporter: new FormControl(null, Validators.required),
-      status: new FormControl(null, Validators.required)
+
+    this.commentsFormArray = this.fb.array([]);
+
+    this.myForm = this.fb.group({
+      title: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      priority: [null, [Validators.required]],
+      reporter: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      comments: this.commentsFormArray
     });
 
     if(this.bugId){
       this.bugsService.getBugByid(this.bugId).subscribe((bug) => 
-        this.myForm.patchValue(bug)
+        {
+          this.myForm.patchValue(bug);
+          bug.comments.forEach( (comment) => this.createCommentFields(comment.reporter, comment.description));
+          console.log(bug.comments);
+        }
       );
     }
   }
@@ -40,6 +49,14 @@ export class BugsCreationComponent implements OnInit {
     else {
       this.bugsService.editBug(this.bugId, this.myForm.value).subscribe(() => this.router.navigate(['/bugs']));
     }
+  }
+
+  createCommentFields(reporter: string, description: string): void{
+    
+    this.commentsFormArray.push(this.fb.group({
+      reporter: [reporter, [Validators.required]],
+      description: [description, [Validators.required]]
+    }))
   }
 
 }
