@@ -1,36 +1,40 @@
 <form [formGroup]="myForm">
-  <div>
+  <div class="formGroup col-md-6">
     <label>Title</label>
-    <input formControlName="title" type="text">
+    <input class ="form-control" formControlName="title" type="text" placeholder="Title">
   </div>
-  <div>
+  <div class="formGroup col-md-6">
     <label>Description</label>
-    <input formControlName="description" type="text">
+    <input class ="form-control" formControlName="description" type="text" placeholder="Description">
   </div>
-  <div>
-    <label>Priority</label>
-    <select formControlName="priority">
-      <option [ngValue]="1">Minor</option>
-      <option [ngValue]="2">Major</option>
-      <option [ngValue]="3">Critical</option>
-    </select>
+  <div class="formGroup col-md-6">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label>Priority</label>
+        <select class ="form-control" formControlName="priority" type="text" placeholder="Select">
+          <!--<option selected>Choose...</option>-->
+          <option [ngValue]="1">Minor</option>
+          <option [ngValue]="2">Major</option>
+          <option [ngValue]="3">Critical</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Reporter</label>
+        <select class ="form-control" formControlName="reporter" type="text" placeholder="Select">
+          <option [ngValue]="'QA'">QA</option>
+          <option [ngValue]="'PO'">PO</option>
+          <option [ngValue]="'DEV'">DEV</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Status</label>
+        <select class ="form-control" formControlName="status" type="text" placeholder="Select">
+          <option [ngValue]="'Ready for Test'">Ready for Test</option>
+          <option [ngValue]="'Done'">Done</option>
+          <option [ngValue]="'Rejected'">Rejected</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onClickSaveBug()">Save</button>
   </div>
-  <div>
-    <label>Reporter</label>
-    <select formControlName="reporter">
-      <option [ngValue]="'QA'">QA</option>
-      <option [ngValue]="'PO'">PO</option>
-      <option [ngValue]="'DEV'">DEV</option>
-    </select>
-  </div>
-  <div>
-    <label>Status</label>
-    <select formControlName="status">
-      <option [ngValue]="'Ready for Test'">Ready for Test</option>
-      <option [ngValue]="'Done'">Done</option>
-      <option [ngValue]="'Rejected'">Rejected</option>
-    </select>
-  </div>
-
-  <button (click)="onClickSaveBug()">Save</button>
 </form>
