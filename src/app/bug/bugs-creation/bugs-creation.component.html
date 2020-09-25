@@ -9,15 +9,27 @@
   </div>
   <div>
     <label>Priority</label>
-    <input formControlName="priority" type="text">
+    <select formControlName="priority">
+      <option [ngValue]="1">Minor</option>
+      <option [ngValue]="2">Major</option>
+      <option [ngValue]="3">Critical</option>
+    </select>
   </div>
   <div>
     <label>Reporter</label>
-    <input formControlName="reporter" type="text">
+    <select formControlName="reporter">
+      <option [ngValue]="'QA'">QA</option>
+      <option [ngValue]="'PO'">PO</option>
+      <option [ngValue]="'DEV'">DEV</option>
+    </select>
   </div>
   <div>
     <label>Status</label>
-    <input formControlName="status" type="text">
+    <select formControlName="status">
+      <option [ngValue]="'Ready for Test'">Ready for Test</option>
+      <option [ngValue]="'Done'">Done</option>
+      <option [ngValue]="'Rejected'">Rejected</option>
+    </select>
   </div>
 
   <button (click)="onClickSaveBug()">Save</button>
